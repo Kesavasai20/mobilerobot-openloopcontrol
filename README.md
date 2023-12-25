@@ -9,77 +9,118 @@ To develop a python control code to move the mobilerobot along the predefined pa
 
 ## Procedure
 
-Step1:
+### 1. Robot Connection:
 
-<br/>
+Connect the RoboMaster EP robot to the PC using Wi-Fi.
 
-Step2:
+### 2. Initialize Robot:
 
-<br/>
+Use the robot.Robot() class to initialize the robot.
+Initialize the chassis (ep_chassis), LED system (ep_led), and camera (ep_camera).
 
-Step3:
+### 3. Start Video Streaming:
 
-<br/>
+Begin the video streaming to visualize the robot's perspective.
+Utilize the ep_camera.start_video_stream(display=True, resolution=camera.STREAM_360P) function to start streaming with a specified resolution and display on the PC.
+### 4. Execute Path Commands:
 
-Step4:
+Sequentially execute movement commands for the robot using the chassis (ep_chassis).
+Set LED effects for visual feedback using ep_led.set_led() after each movement to indicate different states.
+### 5. Path Calibration:
 
-<br/>
+Conduct trial and error to calibrate the robot's path by adjusting movement parameters.
+Fine-tune the robot's trajectory until it accurately follows the desired path.
+### 6. End Operation:
 
-Step5:
+Stop video streaming using ep_camera.stop_video_stream() after the robot completes the designated path.
+Close the robot connection using ep_robot.close().
 
-<br/>
+### 7. Documentation:
+
+Record the parameters and adjustments made during calibration.
+Note any challenges encountered and their resolutions.
+Include a description of the executed path and LED effects for each movement.
 
 ## Program
 ```python
 from robomaster import robot
 import time
+from robomaster import camera
 
-if __name__ == '__main__':
+if _name_ == '_main_':
     ep_robot = robot.Robot()
     ep_robot.initialize(conn_type="ap")
 
     ep_chassis = ep_robot.chassis
+    ep_led = ep_robot.led
+    ep_camera = ep_robot.camera
 
-    ## Write your code here
+    print("Video streaming started.....")
+    ep_camera.start_video_stream(display=True, resolution = camera.STREAM_360P)
 
 
+    ep_chassis.move(x=2.4, y=0, z=0, xy_speed=1.3).wait_for_completed()
+    ep_led.set_led(comp = "all",r=255,g=0,b=0,effect="on")
 
-    
+    ep_chassis.move(x=0.5, y=0, z=75, xy_speed=1.3).wait_for_completed()
+    ep_led.set_led(comp = "all",r=0,g=255,b=0,effect="on")
+
+    ep_chassis.move(x=1, y=0, z=0, xy_speed=1.3).wait_for_completed()
+    ep_led.set_led(comp = "all",r=0,g=0,b=125,effect="on")
+
+    ep_chassis.move(x=0, y=0, z=90, xy_speed=1.3).wait_for_completed()
+    ep_led.set_led(comp = "all",r=0,g=100,b=125,effect="on")
+
+    ep_chassis.move(x=1.6, y=0, z=0, xy_speed=1.3).wait_for_completed()
+    ep_led.set_led(comp = "all",r=0,g=100,b=125,effect="on")
+
+    ep_chassis.move(x=0, y=0, z=-25, xy_speed=1.3).wait_for_completed()
+    ep_led.set_led(comp = "all",r=0,g=150,b=0,effect="on")
+
+    ep_chassis.move(x=1.4, y=0, z=0, xy_speed=1.3).wait_for_completed()
+    ep_led.set_led(comp = "all",r=255,g=153,b=0,effect="on")
+
+    ep_chassis.move(x=0, y=0, z=40, xy_speed=1.3).wait_for_completed()
+    ep_led.set_led(comp = "all",r=204,g=204,b=0,effect="on")
+
+    ep_chassis.move(x=1.4, y=0, z=0, xy_speed=1.3).wait_for_completed()
+    ep_led.set_led(comp = "all",r=0,g=255,b=125,effect="on")
+
+    ep_chassis.move(x=0, y=0, z=95, xy_speed=1.3).wait_for_completed()
+    ep_led.set_led(comp = "all",r=50,g=100,b=150,effect="on")
+
+    ep_chassis.move(x=2.1, y=0, z=0, xy_speed=1.3).wait_for_completed()
+    ep_led.set_led(comp = "all",r=85,g=0,b=120,effect="on")
+
+    ep_chassis.move(x=0, y=0, z=80, xy_speed=1.3).wait_for_completed()
+    ep_led.set_led(comp = "all",r=128,g=128,b=0,effect="on")
+
+    ep_chassis.move(x=0.4, y=0, z=0, xy_speed=1.3).wait_for_completed()
+    ep_led.set_led(comp = "all",r=128,g=0,b=255,effect="on")
+
+    time.sleep(4)
+    ep_camera.stop_video_stream()
+    print("Stopped video streaming.....")
+
     ep_robot.close()
 ```
 
 ## MobileRobot Movement Image:
-
-![robo](./img/robomaster.png)
-
-Insert image here
-
-
+![WhatsApp Image 2023-12-25 at 21 25 51_046c2de2](https://github.com/Kesavasai20/mobilerobot-openloopcontrol/assets/138849303/1a8a271e-14c6-487d-926e-0610f39ce59f)
 <br/>
 <br/>
-<br/>
-<br/>
+![WhatsApp Image 2023-12-25 at 21 25 51_bb375a6f](https://github.com/Kesavasai20/mobilerobot-openloopcontrol/assets/138849303/acc2a6db-3c99-41ff-88d2-a3bb0c53fbb0)
 
 ## MobileRobot Movement Video:
 
-Upload your video in Youtube and paste your video-id here
-
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
-
-<br/>
-<br/>
-<br/>
-<br/>
-
+https://youtu.be/yT29lgqotUU?si=1gka-U-mBiRsgr2e
 ## Result:
 Thus the python program code is developed to move the mobilerobot in the predefined path.
-
-
-<br/>
-<br/>
 
 ```
 Mobile Robotics Laboratory
 Department of Artificial Intelligence and Data Science/ Machine Learning
 Saveetha Engineering College
 ```
+## Developed By : K Kesava sai
+## Register Number : 212223230105
